@@ -1,0 +1,192 @@
+
+.step-links
+{
+   display: inline;
+}
+
+.container
+{
+    padding: 60px 15px 0;
+}
+
+.tag
+{
+    font-size:20px;
+}
+
+.btn-score
+{
+    margin-top: 5px;
+}
+
+.title
+{
+    margin-top: 60px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.create
+{
+    text-decoration:none;
+}
+
+.nickname
+{
+    color:white;
+    margin-bottom: 20px;
+    text-decoration:none;
+}
+#navbarCollapse
+{
+    justify-content: space-around;
+}
+
+#pt
+{
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+#bm
+{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.count
+{
+    border: 2px solid black;
+    width: 30px;
+    text-align: center;
+}
+
+.tag-link-5
+{
+    color: gold;
+}
+
+.tag-link-1
+{
+    color: red;
+}
+
+
+.avatar
+{
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border: 4px solid black;
+}
+
+.names
+{
+    list-style-type:none;
+}
+
+.question
+{
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom:10px;
+    height:140px;
+}
+.question-title{
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom:10px;
+    height:200px;
+    margin-top: 60px;
+}
+.avatar img{
+    max-width: 100%;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.answers-link
+{
+    color: #0a53be;
+}
+.input-title
+{
+    height:30px;
+}
+
+.text-input
+{
+    border-radius: 5px;
+    width: 50%;
+    height: 100%;
+    border-color: grey;
+
+}
+
+
+
+.title-input
+{
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    border-color: grey;
+}
+
+#form-file
+{
+    width:50%;
+}
+
+.line
+{
+    border-top: 2px solid grey;
+    margin-bottom: 10px;
+}
+
+.check-box
+{
+    display:flex;
+    align-items: flex-end;
+}
+
+#btn-question
+{
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+#search
+{
+    width:500px;
+}
+
+.block-avatar
+{
+    width:150px;
+    height:150px;
+    border: 2px solid black;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    line-height: 150px;
+    text-align: center;
+}
+
+.mistake
+{
+    color: red;
+}
+.add-link
+{
+    text-decoration:none;
+    color: White;
+}
+
+#answer-input-1
+{
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 100%;
+    border-color: grey;
+}

@@ -1,0 +1,41 @@
+{% extends "int/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 class="title">Log In</h1>
+<div class="mistake">Wrong password.</div>
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <div>Login</div>
+        </div>
+        <div class="col-10">
+            <div class="form-floating mb-3">
+                <input type="title-question" class="text-input" id="floatingInput-1" >
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <div>Password</div>
+        </div>
+        <div class="col-10">
+            <div class="form-floating mb-3">
+                <input type="title-question" class="text-input" id="floatingInput-2">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-10">
+            <button type="button" class="btn btn-success"><a class="add-link" href="{% url 'login' %}">Login!</a></button>
+            <div><a class="create" href="{% url 'login' %}">create new account</a></div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

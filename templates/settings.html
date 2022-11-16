@@ -1,0 +1,52 @@
+{% extends "int/base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1 class="title">Settings: <span>NICKNAME</span></h1>
+    <div class="mistake">This nickname already taken</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+              <div>Login</div>
+            </div>
+            <div class="col-10">
+              <div class="form-floating mb-3">
+                <input type="title-question" class="text-input" id="floatingInput-1" >
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+              <div>Email</div>
+            </div>
+            <div class="col-10">
+              <div class="form-floating mb-3">
+                <input type="title-question" class="text-input" id="floatingInput-2">
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+              <div>Nickname</div>
+            </div>
+            <div class="col-10">
+              <div class="form-floating mb-3">
+                <input type="title-question" class="text-input" id="floatingInput-3">
+              </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+              <div>Upload Avatar</div>
+            </div>
+            <div class="col-10">
+              <div class="block-avatar">Avatar</div>
+              <div class="mb-3">
+                <input class="form-control" type="file" id="form-file">
+              </div>
+                <button type="button" class="btn btn-success"><a class="add-link" href="{% url 'settings' %}">SAVE</a></button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

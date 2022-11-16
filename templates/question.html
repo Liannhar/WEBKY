@@ -1,0 +1,45 @@
+{% extends "int/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="question-title">
+        <div class="row">
+            <div class="col-2">
+              <div class="avatar">
+                <img src="{% static "img/avatar-1.jpg" %}" alt="">
+              </div>
+              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-score btn-success"></button>
+                <div class="count btn-score">5</div>
+                <button type="button" class="btn btn-score btn-danger"></button>
+              </div>
+            </div>
+            <div class="col-10">
+              <h2 class="question-caption">{{ question.title }}</h2>
+              <div class="question-text">
+                {{ question.text }}
+              </div>
+
+                <span class="tags">
+                Tags:
+                {% for tag in question.tags %}
+                    <span><a class="tags-link" href="{% url 'tag' %}">{{ tag }}</a></span>
+                {% endfor %}
+                </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        {% for questions in question %}
+            {% include "int/answer.html" %}
+        {% endfor %}
+
+
+    <div class="line"></div>
+    <textarea id="answer-input-1" rows="3" placeholder="Enter Answer..."></textarea>
+    <button type="button" class="btn btn-success" id="btn-question"><a class="add-link" href="{% url 'question' question_id=question.id %}">ADD!</a></button>
+
+    {% include "int/paginator.html" %}
+{% endblock %}

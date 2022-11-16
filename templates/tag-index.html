@@ -1,0 +1,13 @@
+{% extends "int/base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1 class="title">Tag: <span><a class="tag-link" href="{% url 'tag' %}">Tags</a></span></h1>
+
+    {% for question in questions %}
+        {% include "int/question_item.html" %}
+    {% endfor %}
+
+    {% include "int/paginator.html" %}
+
+{% endblock %}

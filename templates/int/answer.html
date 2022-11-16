@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="question">
+          <div class="row">
+            <div class="col-2">
+              <div class="avatar">
+                <img src="{% static "img/avatar-1.jpg" %}" alt="">
+              </div>
+              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-score btn-success"></button>
+                <div class="count btn-score">5</div>
+                <button type="button" class="btn btn-score btn-danger"></button>
+              </div>
+            </div>
+            <div class="col-10">
+              <div class="question-text">
+                 {{ question.text }}
+              </div>
+              <div class="form-check" >
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked-1" checked>
+                <label class="form-check-label" for="flexCheckChecked-1">Correct</label>
+              </div>
+
+            </div>
+          </div>
+</div>

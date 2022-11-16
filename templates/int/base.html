@@ -1,0 +1,66 @@
+<!doctype html>
+
+{% load static %}
+
+<html lang="en" class="h-100">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JOJO</title>
+
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static "css/style.css" %}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+
+<header>
+  <!-- Fixed navbar -->
+  <nav class="top-head navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}">JOJO FORUM</a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" id="search" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <button type="button" class="btn btn-success btn-lg"><a class="add-link" href="{% url 'ask' %}">ADD!</a></button>
+        {% if is_auth %}
+            {% include "int/auth.html" %}
+        {% else %}
+            {% include "int/not-auth.html" %}
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-9">
+          {% block content %}
+          {% endblock %}
+      </div>
+      <div class="col-3">
+        <h2 id="pt"> Popular Tags</h2>
+        <span class="tag"><a class="tag-link-1" href="{% url 'tag' %}">Tags</a></span>
+        <span class="tag"><a class="tag-link-2" href="{% url 'tag' %}">Very_Big_Tag</a></span>
+        <span class="tag"><a class="tag-link-3" href="{% url 'tag' %}">Tags</a></span>
+        <span class="tag"><a class="tag-link-4" href="{% url 'tag' %}">Tags</a></span>
+        <span class="tag"><a class="tag-link-5" href="{% url 'tag' %}">Tags</a></span>
+        <span class="tag"><a class="tag-link-6" href="{% url 'tag' %}">Tags</a></span>
+        <span class="tag"><a class="tag-link-7" href="{% url 'tag' %}">Tags</a></span>
+        <h3 id="bm"> Best Members</h3>
+        <li class="names"><a class="name-link-1" href="{% url 'tag' %}">Name1</a></li>
+        <li class="names"><a class="name-link-2" href="{% url 'tag' %}">Name2</a></li>
+        <li class="names"><a class="name-link-3" href="{% url 'tag' %}">Name3</a></li>
+        <li class="names"><a class="name-link-4" href="{% url 'tag' %}">Name4</a></li>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
