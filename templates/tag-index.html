@@ -4,7 +4,7 @@
 {% block content %}
     <h1 class="title">Tag: <span><a class="tag-link" href="{% url 'tag' %}">Tags</a></span></h1>
 
-    {% for question in questions %}
+    {% for question in page_obj %}
         {% include "int/question_item.html" %}
     {% endfor %}
 

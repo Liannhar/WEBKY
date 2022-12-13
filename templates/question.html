@@ -32,7 +32,7 @@
 
         <div class="line"></div>
 
-        {% for questions in question %}
+        {% for questions in page_obj %}
             {% include "int/answer.html" %}
         {% endfor %}
 

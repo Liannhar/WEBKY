@@ -6,7 +6,7 @@
         <a href="{% url "index" %}">New Questions</a>
     </div>
 
-    {% for question in questions %}
+    {% for question in page_obj %}
         {% include "int/question_item.html" %}
     {% endfor %}
 
