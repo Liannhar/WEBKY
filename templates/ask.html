@@ -7,6 +7,6 @@
     <form class="container" novalidate action="/ask/" method="post">
         {% csrf_token %}
         {% bootstrap_form  form %}
-        <button type="button" class="btn btn-success">ASK!</button>
+        <button type="submit" class="btn btn-success">ASK!</button>
     </form>
 {% endblock %}

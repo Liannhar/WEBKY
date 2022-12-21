@@ -52,9 +52,9 @@
         {% endfor %}
 
 
-    <div class="line"></div>
-    <textarea id="answer-input-1" rows="3" placeholder="Enter Answer..."></textarea>
-    <button type="button" class="btn btn-success" id="btn-question"><a class="add-link" href="{% url 'question' question_id=question.id %}">ADD!</a></button>
-
+    <form action="{% url 'question' question_id=question.id %}" method="post">
+        <textarea id="answer-input-1" rows="3" placeholder="Enter Answer..."></textarea>
+        <button type="submit" class="btn btn-success" id="btn-question">ADD!</button>
+    </form>
     {% include "int/paginator.html" %}
 {% endblock %}

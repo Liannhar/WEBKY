@@ -3,119 +3,149 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.http import Http404
 
-# Create your models here.
+
+class CurrentUser:
+    profile = None
+    is_auth = False
 
 
-
-
-class TagManager(models.Manager):
- def get_all(self):
-  return self.all()
-
- def find_by_id(self, id):
-  try:
-   vote = self.get(pk=id)
-  except ObjectDoesNotExist:
-   raise Http404
-  return vote
-
-
-class Tag(models.Model):
- name = models.CharField(max_length=15)
- objects = TagManager()
-
- def __str__(self):
-  return f'Tag {self.name}'
+class ProfileManager(models.Manager):
+    def find_by_user(self, user):
+        return self.get(user__exact=user)
 
 
 class Profile(models.Model):
- user = models.OneToOneField(User, on_delete=models.CASCADE)
- avatar = models.ImageField(blank=True, null=True, upload_to="media")
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nickname = models.CharField(max_length=50)
+    avatar = models.ImageField(blank=True, null=True, upload_to="uploads/images/")
 
+    def __str__(self):
+        return self.user.username
+
+    objects = ProfileManager()
 
 class QuestionManager(models.Manager):
- def get_hot_questions(self):
-  return self.filter(status__exact='h')
+    def get_hot_questions(self):
+        return self.filter(status__exact='h')
 
- def get_new_questions(self):
-  return self.order_by('-date')
+    def get_new_questions(self):
+        return self.order_by('-date')
 
- def get_tagged_questions(self, tag):
-  return self.filter(tag__exact=tag)
+    def get_questions_by_tag(self, tag):
+        return self.filter(tag__exact=tag)
 
- def get_questions(self):
-  return self.all()
+    def get_questions(self):
+        return self.all()
 
- def find_by_id(self, id):
-  try:
-   vote = self.get(pk=id)
-  except ObjectDoesNotExist:
-   raise Http404
-  return vote
-
-
-class AnswerManager(models.Manager):
- def get_answers(self, question):
-  return self.filter(question__exact=question)
-
- def get_answers_count(self, question):
-  return self.filter(question__exact=question).count()
-
-
-class LikeManager(models.Manager):
- def get_answers_likes(self, answer):
-  return self.filter(answer__exact=answer).count()
-
- def get_questions_likes(self, question):
-  return self.filter(question__exact=question).count()
-
-
-# q = models.Question.objects.get_tagged_questions(1)
+    def find_by_id(self, id):
+        try:
+            vote = self.get(pk=id)
+        except ObjectDoesNotExist:
+            raise Http404
+        return vote
 
 
 class Question(models.Model):
- title = models.CharField(max_length=60)
- tag = models.ManyToManyField(Tag)
- text = models.TextField()
- user = models.ForeignKey(Profile, related_name='profile_related', on_delete=models.CASCADE, blank=True, null=True)
+    profile = models.ForeignKey(Profile, models.PROTECT)
 
- HOT = 'h'
- NORMAL = 'n'
- STATUSES = [
-  (HOT, 'hot'),
-  (NORMAL, 'ok')
- ]
+    title = models.CharField(max_length=50)
+    text = models.TextField()
 
- status = models.CharField(max_length=1, choices=STATUSES)
- date = models.DateTimeField(blank=True, null=True)
- objects = QuestionManager()
+    tags = None
+    answers_count = 0
+    like_number = 0
 
- def __str__(self):
-  return f'Question {self.title}'
+    HOT = 'h'
+    NORMAL = 'n'
+    STATUSES = [
+        (HOT, 'hot'),
+        (NORMAL, 'normal')
+    ]
+    status = models.CharField(max_length=1, choices=STATUSES)
+    date = models.DateTimeField(blank=True, null=True)
+
+    objects = QuestionManager()
+    def __str__(self):
+        return self.title
+
+
+class TagManager(models.Manager):
+    def get_tags_by_question(self, question):
+        return self.filter(question__exact=question)
+
+    def find_by_name(self, name):
+        return self.get(name__exact=name)
+
+    def find_id_by_name(self, name):
+        try:
+            vote = self.get(name__exact=name).id
+        except ObjectDoesNotExist:
+            raise Http404
+        return vote
+    def find_by_id(self, id):
+        try:
+            vote = self.get(pk=id)
+        except ObjectDoesNotExist:
+            raise Http404
+        return vote
+    def get_tags(self):
+        return self.all()
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=30)
+    objects = TagManager()
+
+    question = models.ManyToManyField(Question)
+
+    def __str__(self):
+        return self.name
+
+
+class AnswerManager(models.Manager):
+    def get_answers(self, question):
+        return self.filter(question__exact=question)
+
+    def get_answers_count(self, question):
+        return self.filter(question__exact=question).count()
 
 
 class Answer(models.Model):
- text = models.TextField()
- user = models.ForeignKey(Profile, related_name='profile_related1', on_delete=models.CASCADE, blank=True, null=True)
- question = models.ForeignKey(Question, related_name='question_related', on_delete=models.CASCADE, blank=True,
-                              null=True)
- objects = AnswerManager()
+    profile = models.ForeignKey(Profile, models.PROTECT)
+    question = models.ForeignKey(Question, models.CASCADE)
+
+    text = models.TextField()
+    correct = models.BooleanField(default=False)
+
+    like_number = 0
+
+    objects = AnswerManager()
+
+    def __str__(self):
+        return self.text[:100]
+
+
+class LikeQuestionManager(models.Manager):
+    def get_questions_likes(self, question):
+        return self.filter(question__exact=question).count()
 
 
 class LikeQuestion(models.Model):
- question = models.ForeignKey(Question, related_name="question_like", on_delete=models.CASCADE)
- profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, models.CASCADE)
+    question = models.ForeignKey(Question, models.CASCADE)
 
- def __str__(self):
-  return f"{self.profile.user.username} {self.question.title}"
+    objects = LikeQuestionManager()
 
- objects = LikeManager()
+
+class LikeAnswerManager(models.Manager):
+    def get_answers_likes(self, answer):
+        return self.filter(answer__exact=answer).count()
 
 
 class LikeAnswer(models.Model):
- user = models.ForeignKey(Profile, related_name='profile_related3', on_delete=models.CASCADE, blank=True, null=True)
- answer = models.ForeignKey(Answer, on_delete=models.CASCADE, blank=True,null=True)
+    profile = models.ForeignKey(Profile, models.CASCADE)
+    answer = models.ForeignKey(Answer, models.CASCADE)
 
- objects = LikeManager()
+    objects = LikeAnswerManager()
 
 
