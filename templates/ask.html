@@ -1,39 +1,12 @@
 {% extends "int/base.html" %}
+{% load bootstrap5 %}
 {% load static %}
 
 {% block content %}
     <h1 class="title">New Question</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-2">
-                <div>Title</div>
-            </div>
-            <div class="col-10">
-              <div class="form-floating mb-3">
-                <input type="title-question" class="text-input" id="floatingInput-1" >
-              </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-2">
-              <div>Text</div>
-            </div>
-            <div class="col-10">
-              <textarea class="text-input" id="answer-input-1" rows="5" placeholder="Enter Question..."></textarea>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-2">
-              <div>Tags</div>
-            </div>
-            <div class="col-10">
-              <div class="form-floating mb-3">
-                <input type="title-question" class="text-input" id="floatingInput-2" placeholder="Tags">
-              </div>
-              <button type="button" class="btn btn-success"><a class="add-link" href="{% url 'ask' %}">ASK!</a></button>
-            </div>
-        </div>
-    </div>
+    <form class="container" novalidate action="/ask/" method="post">
+        {% csrf_token %}
+        {% bootstrap_form  form %}
+        <button type="button" class="btn btn-success">ASK!</button>
+    </form>
 {% endblock %}

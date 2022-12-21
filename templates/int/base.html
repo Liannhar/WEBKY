@@ -46,18 +46,14 @@
       </div>
       <div class="col-3">
         <h2 id="pt"> Popular Tags</h2>
-        <span class="tag"><a class="tag-link-1" href="{% url 'tag' %}">Tags</a></span>
-        <span class="tag"><a class="tag-link-2" href="{% url 'tag' %}">Very_Big_Tag</a></span>
-        <span class="tag"><a class="tag-link-3" href="{% url 'tag' %}">Tags</a></span>
-        <span class="tag"><a class="tag-link-4" href="{% url 'tag' %}">Tags</a></span>
-        <span class="tag"><a class="tag-link-5" href="{% url 'tag' %}">Tags</a></span>
-        <span class="tag"><a class="tag-link-6" href="{% url 'tag' %}">Tags</a></span>
-        <span class="tag"><a class="tag-link-7" href="{% url 'tag' %}">Tags</a></span>
+        {% block tags %}
+        {% endblock %}
         <h3 id="bm"> Best Members</h3>
-        <li class="names"><a class="name-link-1" href="{% url 'tag' %}">Name1</a></li>
-        <li class="names"><a class="name-link-2" href="{% url 'tag' %}">Name2</a></li>
-        <li class="names"><a class="name-link-3" href="{% url 'tag' %}">Name3</a></li>
-        <li class="names"><a class="name-link-4" href="{% url 'tag' %}">Name4</a></li>
+         <ol class="list-group list-group-numbered" style="margin-right: 130px; margin-left: 80px;">
+                    {% include 'int/best_member.html' %}
+                    {% include 'int/best_member.html' %}
+                    {% include 'int/best_member.html' %}
+                </ol>
       </div>
     </div>
   </div>
