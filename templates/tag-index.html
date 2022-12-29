@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <h1 class="title">Tag: <span><a class="tag-link" href="{% url 'tag' %}">{{ tag.name }}</a></span></h1>
+    <h1 class="title">Tag: <h1>{{ tag }}</h1></h1>
 
     {% for question in page_obj.object_list %}
         {% include "int/question_item.html" %}

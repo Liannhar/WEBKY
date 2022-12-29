@@ -7,7 +7,7 @@ from django.urls import reverse, path
 from . import models
 from . import forms
 
-base_context = {'base_tags': models.Tag.objects.get_tags(),
+base_context = {'base_tags': models.Tag.objects.get_tags()[:10],
                 'current_user': models.CurrentUser}
 
 
@@ -18,6 +18,7 @@ def index(request):
     for question in contact_list:
         question.answers_count = models.Answer.objects.get_answers_count(question)
         question.tags = models.Tag.objects.get_tags_by_question(question)
+
         question.like_number = models.LikeQuestion.objects.get_questions_likes(question)
 
     context = {'page_obj': pagging(contact_list, request)}
@@ -78,7 +79,7 @@ def question(request, question_id: int):
     for answer in answers:
         answer.like_number = models.LikeAnswer.objects.get_answers_likes(answer)
 
-    context.update({'question': question_item, 'answers': answers,'form':form})
+    context.update({'question': question_item, 'answers': answers})
     context.update(base_context)
 
     return render(request, 'question.html', context=context)
@@ -163,7 +164,8 @@ def settings(request):
         return redirect(reverse("login"))
 
     context = {}
-
+    if request.method == "GET":
+        form = forms.SettingsForm()
     if request.method == "POST":
         form = forms.SettingsForm(request.POST)
         if form.is_valid():
@@ -180,7 +182,7 @@ def settings(request):
     return render(request, 'settings.html', context=context)
 
 
-def pagging(object_list, request, per_page=3):
+def pagging(object_list, request, per_page=30):
     paginator = Paginator(object_list, per_page)
     page_number = request.GET.get('page', 1)
 

@@ -26,11 +26,33 @@
           <input class="form-control me-2" id="search" type="search" placeholder="Search" aria-label="Search">
         </form>
         <button type="button" class="btn btn-success btn-lg"><a class="add-link" href="{% url 'ask' %}">ADD!</a></button>
-        {% if is_auth %}
-            {% include "int/auth.html" %}
-        {% else %}
-            {% include "int/not-auth.html" %}
-        {% endif %}
+        {% if current_user.is_auth %}
+                    <div class="row">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item">
+                                <div class="avatar">
+                                    <img src="{% static 'img/../../static/img/avatar-1.jpg' %}" alt=""/>
+                                </div>
+                            </li>
+                            <li class="nav-item ms-4">
+                                <div class="row">
+                                    <h4 style="color: white">{{ current_user.profile.nickname }}</h4>
+                                    <a class="col-6" href="{% url 'settings' %}">Settings</a>
+                                    <a class="col-6" href="{% url 'logout' %}">Log out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="row">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item ms-4">
+                                <a class="col-6" href="{% url 'login' %}">Log In</a>
+                                <a class="col-6" href="{% url 'signup' %}">Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
       </div>
     </div>
   </nav>
@@ -46,8 +68,15 @@
       </div>
       <div class="col-3">
         <h2 id="pt"> Popular Tags</h2>
-        {% block tags %}
-        {% endblock %}
+        <ul class="nav">
+        <li class="nav-item">
+            {% for  tag in base_tags %}
+                <li class="nav-item">
+                    <a class="nav-link " href={%   url 'tag' tag_name=tag  %}>{{ tag }}</a>
+                </li>
+            {% endfor %}
+
+    </ul>
         <h3 id="bm"> Best Members</h3>
          <ol class="list-group list-group-numbered" style="margin-right: 130px; margin-left: 80px;">
                     {% include 'int/best_member.html' %}
