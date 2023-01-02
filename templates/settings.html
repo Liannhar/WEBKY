@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <h1 class="title">Settings: <span>NICKNAME</span></h1>
+    <h1 class="title">Settings: <span>{{ options.nickname }}</span></h1>
     <div class="mistake">This nickname already taken</div>
     <div class="container">
         <div class="row">
@@ -11,7 +11,7 @@
             </div>
             <div class="col-10">
               <div class="form-floating mb-3">
-                <input type="title-question" class="text-input" id="floatingInput-1" >
+                <input type="title-question" class="text-input" id="floatingInput-1" value="{{ options.username }}">
               </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-10">
               <div class="form-floating mb-3">
-                <input type="title-question" class="text-input" id="floatingInput-3">
+                <input type="title-question" class="text-input" id="floatingInput-3" value="{{ options.nickname }}">
               </div>
             </div>
         </div>

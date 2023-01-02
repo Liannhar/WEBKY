@@ -1,0 +1,9 @@
+{% extends "int/base.html" %}
+
+{% load static %}
+
+{% block tags %}
+    {% for tag in tag.all %}
+        {% include 'int/tag_list.html' with tag=question.tag %}
+    {% endfor %}
+{% endblock %}

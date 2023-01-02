@@ -190,3 +190,10 @@
     width: 100%;
     border-color: grey;
 }
+
+.ContainerWhite {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  color:black;
+}

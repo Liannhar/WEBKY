@@ -4,23 +4,30 @@
           <div class="row">
             <div class="col-2">
               <div class="avatar">
-                <img src="{% static "img/avatar-1.jpg" %}" alt="">
-              </div>
-              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                <button type="button" class="btn btn-score btn-success"></button>
-                <div class="count btn-score">5</div>
-                <button type="button" class="btn btn-score btn-danger"></button>
+                <img src="{% static 'img/../../static/img/avatar-2.jpg' %}" alt="">
               </div>
             </div>
-            <div class="col-10">
-              <div class="question-text">
-                 {{ question.text }}
+              <div class="col-10">
+                <div class="question-text">{{ answer.text }}</div>
               </div>
-              <div class="form-check" >
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked-1" checked>
-                <label class="form-check-label" for="flexCheckChecked-1">Correct</label>
-              </div>
-
-            </div>
           </div>
+    <div class="ContainerWhite">
+        <div class="like">{{ answer.likes }}</div>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group"
+             style="margin-top:20px; padding-bottom:30px;">
+            <input type="radio" class="btn-check" name="btnradio3{{ answer.id }}" id="btnradio4{{ answer.id }}"
+                   autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio4{{ answer.id }}">Up</label>
+
+            <input type="radio" class="btn-check" name="btnradio3{{ answer.id }}" id="btnradio5{{ answer.id }}"
+                   autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio5{{ answer.id }}">Down</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                Answer correct
+            </label>
+        </div>
+    </div>
 </div>
